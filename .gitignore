@@ -8,3 +8,8 @@ Thumbs.db
 
 */build/
 */.gradle/
+
+*/node_modules/
+*/dist
+*/logs
+*/*.log
