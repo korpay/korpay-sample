@@ -109,29 +109,29 @@
      * 인증 응답 데이터가 아닌 승인 응답 데이터를 사용해야 합니다.
      *
      * 결제 성공 응답
-     * $resultCode : 결과 코드
-     * $message : 결과 메세지
-     * $tid : 결제 고유 번호
-     * $merchantId : MID
-     * $orderNumber : 주문번호
-     * $productName : 상품명
-     * $currency : 결제 통화
-     * $amount : 승인 금액
-     * $approvedAt : 승인 일시
-     * $payMethod : 결제 수단
-     * $reserved : 예약 필드
-     * $card :
+     * resultCode : 결과 코드
+     * message : 결과 메세지
+     * tid : 결제 고유 번호
+     * merchantId : MID
+     * orderNumber : 주문번호
+     * productName : 상품명
+     * currency : 결제 통화
+     * amount : 승인 금액
+     * approvedAt : 승인 일시
+     * payMethod : 결제 수단
+     * reserved : 예약 필드
+     * card :
             {
-                $approvalCode : 발급사 코드
-                $installment : 승인 할부개월
-                $approvalNumber : 승인 번호
-                $usePointAmt : 사용 포인트
-                $remainPointAmt : 잔액 포인트
+                approvalCode : 발급사 코드
+                installment : 승인 할부개월
+                approvalNumber : 승인 번호
+                usePointAmt : 사용 포인트
+                remainPointAmt : 잔액 포인트
             }
 
      * 결제 실패 응답
-     * $resultCode : 결과 코드
-     * $message : 결과 메세지
+     * resultCode : 결과 코드
+     * message : 결과 메세지
      *******************************************************
      */
 

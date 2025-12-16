@@ -8,13 +8,13 @@
      * <인증요청 페이지>
      *
      * 필수 값
-     * $merchantId : MID
-     * $merchantKey : MKEY
-     * $productName : 상품명
-     * $orderNumber : 주문 번호
-     * $amount : 결제 요청 금액
-     * $payMethod : 결제 요청 수단(card 고정)
-     * $returnUrl : 응답 페이지
+     * merchantId : MID
+     * merchantKey : MKEY
+     * productName : 상품명
+     * orderNumber : 주문 번호
+     * amount : 결제 요청 금액
+     * payMethod : 결제 요청 수단(card 고정)
+     * returnUrl : 응답 페이지
      *******************************************************
      */
     String merchantId = "";
@@ -28,16 +28,16 @@
     /*
      *******************************************************
      * 옵션 값
-     * $customerName : 구매자 이름
-     * $customerEmail : 구매자 이메일
-     * $customerPhone : 구매자 전화번호
-     * $customerAddress : 구매자 주소
-     * $customerPost : 구매자 우편번호
-     * $reserved : 예약 필드
-     * $language : 언어
-     * $testMode : 테스트 결제
-     * $cardCode : 허용 카드사
-     * $installment : 허용 할부개월
+     * customerName : 구매자 이름
+     * customerEmail : 구매자 이메일
+     * customerPhone : 구매자 전화번호
+     * customerAddress : 구매자 주소
+     * customerPost : 구매자 우편번호
+     * reserved : 예약 필드
+     * language : 언어
+     * testMode : 테스트 결제
+     * cardCode : 허용 카드사
+     * installment : 허용 할부개월
      *******************************************************
      */
     String customerName = "홍길동";
