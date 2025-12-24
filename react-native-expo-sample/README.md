@@ -26,3 +26,23 @@
    npx expo run:android --device
    npx expo run:ios --device
    ```
+
+### 참고 사항
+
+로컬 개발 환경 등에서 **HTTP 통신을 사용하는 경우**, 플랫폼별로 아래 설정이 필요합니다.
+
+#### Android
+
+HTTP 통신을 허용하려면 `AndroidManifest.xml`에 아래 설정을 추가해야 합니다.
+
+```xml
+android:usesCleartextTraffic="true"
+```
+
+#### iOS
+
+HTTP 통신을 허용하려면 app.json 또는 Info.plist에 아래 설정을 추가해야 합니다.
+
+```plist
+NSAllowsArbitraryLoads = true
+```
