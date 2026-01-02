@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+    <title>결제 TEST</title>
+
+    <script src="https://BASE_URL/js/korpay-sdk.js"></script>
+
+    <style>
+        body {
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .checkout-card {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .card-header .amount {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .info-row span:last-child {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .divider {
+            border-top: 1px dashed #ddd;
+            margin: 20px 0;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .pay-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body style="margin: 0 auto">
+
+<div class="checkout-card">
+    <div class="card-header">
+        <h2>결제 금액</h2>
+        <div class="amount">[[${auth.amount}]]원</div>
+    </div>
+    <div class="card-body">
+        <div class="info-row">
+            <span>상품명</span>
+            <span>[[${auth.productName}]]</span>
+        </div>
+        <div class="info-row">
+            <span>주문번호</span>
+            <span>[[${auth.orderNumber}]]</span>
+        </div>
+
+        <div class="info-row" th:if="${not #strings.isEmpty(auth.customerName)}">
+            <span>구매자 명</span>
+            <span>[[${auth.customerName}]]</span>
+        </div>
+
+        <div class="info-row" th:if="${not #strings.isEmpty(auth.customerEmail)}">
+            <span>구매자 이메일</span>
+            <span>[[${auth.customerEmail}]]</span>
+        </div>
+
+        <div class="info-row" th:if="${not #strings.isEmpty(auth.customerPhone)}">
+            <span>구매자 전화번호</span>
+            <span>[[${auth.customerPhone}]]</span>
+        </div>
+        
+        <div class="info-row" th:if="${not #strings.isEmpty(auth.customerAddress)}">
+            <span>구매자 주소</span>
+            <span>[[${auth.customerAddress}]]</span>
+        </div>
+
+        <div class="info-row" th:if="${not #strings.isEmpty(auth.customerPost)}">
+            <span>구매자 우편번호</span>
+            <span>[[${auth.customerPost}]]</span>
+        </div>
+
+        <div class="divider"></div>
+        <button id="payBtn" class="pay-btn">결제하기</button>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        const payBtn = document.getElementById('payBtn');
+
+        payBtn.addEventListener('click', () => {
+            const paymentData = {
+                merchantId: [[${auth.merchantId}]],
+                productName: [[${auth.productName}]],
+                orderNumber: [[${auth.orderNumber}]],
+                amount: [[${auth.amount}]],
+                payMethod: [[${auth.payMethod}]],
+                returnUrl: [[${auth.returnUrl}]],
+                ediDate: [[${auth.ediDate}]],
+                hashKey: [[${auth.hashKey}]],
+
+                /* Options */
+                customerName: [[${auth.customerName}]],
+                customerEmail: [[${auth.customerEmail}]],
+                customerPhone: [[${auth.customerPhone}]],
+                customerAddress: [[${auth.customerAddress}]],
+                customerPost: [[${auth.customerPost}]],
+                reserved: [[${auth.reserved}]],
+                language: [[${auth.language}]],
+                testMode: [[${auth.testMode}]],
+                cardCode: [[${auth.cardCode}]],
+                installment: [[${auth.installment}]],
+            };
+
+            KorpaySDK.payment("https://BASE_URL", paymentData, {
+                onStart: () => {
+                    payBtn.disabled = true;
+                    payBtn.innerText = "결제창 호출 중...";
+                },
+                onError: (err) => {
+                    alert(err);
+                    payBtn.disabled = false;
+                    payBtn.innerText = "결제하기";
+                },
+                onClose: () => {
+                    payBtn.disabled = false;
+                    payBtn.innerText = "결제하기";
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
