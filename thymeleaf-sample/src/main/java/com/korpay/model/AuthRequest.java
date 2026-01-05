@@ -26,7 +26,7 @@ public class AuthRequest {
     String merchantId = "";
     String merchantKey = "";
     String productName = "테스트 상품";
-    String orderNumber = "test_order" + LocalDate.now() + (int) (Math.random() * 10000);
+    String orderNumber = "testOrder" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + ThreadLocalRandom.current().nextInt(1000);
     int amount = 1004;
     String payMethod = "card";
     String returnUrl = "http://localhost:8080/confirm";

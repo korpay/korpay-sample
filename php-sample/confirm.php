@@ -101,6 +101,9 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
         'paymentKey' => $paymentKey,
 ]));
+// 웹 방화벽 으로 인하여 User Agent 설정은 필수 입니다.
+curl_setopt($ch, CURLOPT_USERAGENT, 'Korpay-Sample-PHP-Client');
+
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch);

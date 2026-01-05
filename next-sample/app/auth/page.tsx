@@ -22,7 +22,7 @@ function getPaymentInfo() : RequestData {
     const merchantId = '';
     const merchantKey = '';
     const productName = '테스트 상품';
-    const orderNumber = `test_order${getCurrentDateTime()}${random()}`
+    const orderNumber = `testOrder${getCurrentDateTime()}${random()}`
     const amount = 1004;
     const payMethod = 'card';
     const returnUrl = 'http://localhost:3000/confirm';
