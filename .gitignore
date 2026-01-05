@@ -13,3 +13,5 @@ Thumbs.db
 */dist
 */logs
 */*.log
+
+*/package-lock.json

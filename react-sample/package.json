@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@korpay/sdk": "^1.0.2",
+    "@korpay/sdk": "^1.0.4",
     "@tanstack/react-router": "^1.141.2",
     "cors": "^2.8.5",
     "express": "^5.2.1",
