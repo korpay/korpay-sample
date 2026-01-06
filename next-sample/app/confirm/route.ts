@@ -1,9 +1,9 @@
-import {NextRequest} from "next/server";
-import {redirect} from "next/navigation";
+import { NextRequest } from "next/server";
+import { redirect } from "next/navigation";
 
 export async function POST(request: NextRequest) {
 
-    const localUrl = `http://localhost:3000/`;
+    const localUrl = `http://localhost:3000`;
 
     /*
     *******************************************************
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     const isAuthSuccess = (resultCode === '0000' && paymentKey);
     if (!isAuthSuccess) {
         console.error(message);
-        const redirectUrl = `${localUrl}fail?orderNumber=${orderNumber}`;
+        const redirectUrl = `${localUrl}/fail?orderNumber=${orderNumber}`;
         return redirect(redirectUrl);
     }
 

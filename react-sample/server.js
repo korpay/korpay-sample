@@ -97,7 +97,7 @@ app.post('/api/payment/info', (_, res) => {
 
 app.post('/confirm', async (req, res) => {
 
-    const localUrl = `http://localhost:5173/`;
+    const localUrl = `http://localhost:5173`;
     /*
     *******************************************************
     * 1. 파라미터 수신
@@ -132,7 +132,7 @@ app.post('/confirm', async (req, res) => {
     const isAuthSuccess = (resultCode === '0000' && paymentKey);
     if (!isAuthSuccess) {
         console.error(message);
-        const redirectUrl = `${localUrl}fail?orderNumber=${orderNumber}`;
+        const redirectUrl = `${localUrl}/fail?orderNumber=${orderNumber}`;
         return res.redirect(redirectUrl);
     }
 
