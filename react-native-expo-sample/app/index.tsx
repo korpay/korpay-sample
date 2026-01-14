@@ -1,10 +1,11 @@
 
-import { Alert, Linking, Platform, StyleSheet } from 'react-native';
+import { Alert, BackHandler, Linking, Platform, StyleSheet } from 'react-native';
 import * as AppLauncher from 'react-native-intent-app-launcher';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
 import { openAppStoreByScheme } from '../utils/iosUtils';
+import { useEffect, useRef } from 'react';
 
 const openIsoApp = async (url: string): Promise<void> => {
   const isAppInstalled = await Linking.canOpenURL(url);
@@ -54,6 +55,20 @@ const openAndroidApp = async (url: string): Promise<void> => {
 
 
 export default function HomeScreen() {
+  const webViewRef = useRef<WebView>(null);
+  const canGoBackRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    const backhandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (canGoBackRef.current && webViewRef.current) {
+        webViewRef.current.goBack();
+        return true;
+      }
+      return false;
+    });
+
+    return () => backhandler.remove();
+  }, []);
 
   const onShouldStartLoadWithRequest = (
     event: ShouldStartLoadRequest
@@ -85,12 +100,18 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
 
       <WebView
+        ref={webViewRef}
         style={styles.container}
         javaScriptEnabled={true}
         setSupportMultipleWindows={false}
         originWhitelist={['*']}
+        incognito={true}
         onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
         source={{ uri: 'http://localhost:80/auth.php' }}
+        onNavigationStateChange={(navState) => {
+          canGoBackRef.current = navState.canGoBack;
+        }}
+        allowsBackForwardNavigationGestures={true}
       />
 
     </SafeAreaView>
