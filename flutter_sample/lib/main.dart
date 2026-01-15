@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_intent_app_launcher/flutter_intent_app_launcher.dart';
 import 'ios_utils.dart';
@@ -11,8 +12,15 @@ void main() {
   runApp(const MaterialApp(home: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _WebViewState();
+}
+
+class _WebViewState extends State<MyApp> {
+  InAppWebViewController? _webViewController;
 
   Future<void> _handleAndroidIntent(
     String url,
@@ -93,43 +101,54 @@ class MyApp extends StatelessWidget {
     final launcher = FlutterIntentAppLauncher();
 
     return SafeArea(
-      child: Scaffold(
-        body: InAppWebView(
-          initialUrlRequest: URLRequest(
-            url: WebUri('http://localhost:80/auth.php'),
-          ),
-          initialSettings: InAppWebViewSettings(
-            javaScriptEnabled: true,
-            resourceCustomSchemes: ['intent'],
-          ),
-          shouldOverrideUrlLoading: (controller, navigationAction) async {
-            final uri = navigationAction.request.url!;
-            final String originUrl = uri.rawValue;
-            String url = uri.rawValue;
-            final isMainFrame = navigationAction.isForMainFrame;
+        child: PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (didPop, result) async {
+              if (didPop) return;
 
-            debugPrint('DEBUG shouldOverride url : $url');
+              final controller = _webViewController;
+              if (controller == null) return;
 
-            if (url.startsWith('http') ||
-                url.startsWith('https') ||
-                url.startsWith('about')) {
-              return NavigationActionPolicy.ALLOW;
-            }
+              if (await controller.canGoBack()) {
+                controller.goBack();
+                return;
+              }
 
-            if (!isMainFrame) {
-              await controller.stopLoading();
-            }
+              SystemNavigator.pop();
+              return;
+            },
+            child: Scaffold(
+              body: InAppWebView(
+                initialUrlRequest: URLRequest(
+                  url: WebUri('http://localhost:80/auth.php'),
+                ),
+                initialSettings: InAppWebViewSettings(
+                  javaScriptEnabled: true,
+                  allowsBackForwardNavigationGestures: true,
+                ),
+                onWebViewCreated: (controller) {
+                  _webViewController = controller;
+                },
+                shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  final uri = navigationAction.request.url!;
+                  final String originUrl = uri.rawValue;
+                  String url = uri.rawValue;
 
-            if (Platform.isAndroid) {
-              await _handleAndroidIntent(url, originUrl, launcher);
-            } else if (Platform.isIOS) {
-              await _handleIosIntent(url, context);
-            }
+                  if (url.startsWith('http') ||
+                      url.startsWith('https') ||
+                      url.startsWith('about')) {
+                    return NavigationActionPolicy.ALLOW;
+                  }
 
-            return NavigationActionPolicy.CANCEL;
-          },
-        ),
-      ),
-    );
+                  if (Platform.isAndroid) {
+                    await _handleAndroidIntent(url, originUrl, launcher);
+                  } else if (Platform.isIOS) {
+                    await _handleIosIntent(url, context);
+                  }
+
+                  return NavigationActionPolicy.CANCEL;
+                },
+              ),
+            )));
   }
 }
