@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_intent_app_launcher/flutter_intent_app_launcher.dart';
+import 'package:flutter_sample/success.dart';
 import 'ios_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -51,7 +52,7 @@ class _WebViewState extends State<MyApp> {
     }
   }
 
-  Future<void> _handleIosIntent(String url, BuildContext context) async {
+  Future<void> _handleIosIntent(String url) async {
     try {
       final uri = Uri.parse(url);
 
@@ -70,9 +71,11 @@ class _WebViewState extends State<MyApp> {
         if (await canLaunchUrl(storeUri)) {
           await launchUrl(storeUri);
         } else {
+          if (!mounted) return;
           _showAlert(context, '오류', '스토어 링크를 열 수 없습니다.');
         }
       } else {
+        if (!mounted) return;
         _showAlert(context, '오류', '스토어 정보를 찾을 수 없습니다.');
       }
     } catch (e) {
@@ -125,6 +128,7 @@ class _WebViewState extends State<MyApp> {
                 initialSettings: InAppWebViewSettings(
                   javaScriptEnabled: true,
                   allowsBackForwardNavigationGestures: true,
+                  useShouldOverrideUrlLoading: true,
                 ),
                 onWebViewCreated: (controller) {
                   _webViewController = controller;
@@ -134,19 +138,36 @@ class _WebViewState extends State<MyApp> {
                   final String originUrl = uri.rawValue;
                   String url = uri.rawValue;
 
-                  if (url.startsWith('http') ||
-                      url.startsWith('https') ||
-                      url.startsWith('about')) {
-                    return NavigationActionPolicy.ALLOW;
+                  if (uri.path.endsWith('/success.php')) {
+                    final orderNumber = uri.queryParameters['orderNumber'];
+                    final nav = Navigator.of(context);
+
+                    nav.pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const MyApp()),
+                      (route) => false,
+                    );
+
+                    nav.push(
+                      MaterialPageRoute(
+                        builder: (_) => SuccessScreen(orderNumber: orderNumber),
+                      ),
+                    );
+                    return NavigationActionPolicy.CANCEL;
                   }
 
-                  if (Platform.isAndroid) {
-                    await _handleAndroidIntent(url, originUrl, launcher);
-                  } else if (Platform.isIOS) {
-                    await _handleIosIntent(url, context);
+                  if (!url.startsWith('http') &&
+                      !url.startsWith('https') &&
+                      !url.startsWith('about')) {
+                    if (Platform.isAndroid) {
+                      await _handleAndroidIntent(url, originUrl, launcher);
+                    } else if (Platform.isIOS) {
+                      await _handleIosIntent(url);
+                    }
+
+                    return NavigationActionPolicy.CANCEL;
                   }
 
-                  return NavigationActionPolicy.CANCEL;
+                  return NavigationActionPolicy.ALLOW;
                 },
               ),
             )));
