@@ -6,6 +6,7 @@ import { WebView } from 'react-native-webview';
 import { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
 import { openAppStoreByScheme } from '../utils/iosUtils';
 import { useEffect, useRef } from 'react';
+import { router } from 'expo-router';
 
 const openIsoApp = async (url: string): Promise<void> => {
   const isAppInstalled = await Linking.canOpenURL(url);
@@ -73,7 +74,19 @@ export default function HomeScreen() {
   const onShouldStartLoadWithRequest = (
     event: ShouldStartLoadRequest
   ): boolean => {
-    const url = event.url;
+    const { url } = event;
+
+    if (url.includes('/success.php')) {
+      const urlObj = new URL(url);
+      const orderNumber = urlObj.searchParams.get('orderNumber');
+
+      router.replace({
+        pathname: '/success',
+        params: { orderNumber: orderNumber || '' }
+      });
+      return false;
+    }
+
 
     if (
       url.startsWith('http') ||
@@ -85,15 +98,11 @@ export default function HomeScreen() {
 
     if (Platform.OS === 'android') {
       openAndroidApp(url);
-      return false;
-    }
-
-    if (Platform.OS === 'ios') {
+    } else {
       openIsoApp(url);
-      return false;
     }
 
-    return true;
+    return false;
   };
 
   return (
