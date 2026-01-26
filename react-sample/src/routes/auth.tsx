@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import KorpaySDK from "@korpay/sdk";
-import type { RequestData } from "@korpay/sdk";
+import KorpaySdk, { type PaymentData } from "@korpay/sdk";
 import { useEffect, useState } from "react";
 import "./Auth.css";
 
@@ -9,7 +8,7 @@ export const Route = createFileRoute("/auth")({
 });
 
 function RouteComponent() {
-  const [paymentData, setPaymentData] = useState<RequestData>();
+  const [paymentData, setPaymentData] = useState<PaymentData>();
   const [btnDisabled, setBtnDisabled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function RouteComponent() {
       return;
     }
 
-    KorpaySDK.payment("https://BASE_URL", paymentData, {
+    KorpaySdk.payment("https://BASE_URL", paymentData, {
       onStart: () => {
         setBtnDisabled(true);
       },
@@ -106,10 +105,10 @@ function RouteComponent() {
 
         <button
           id="payBtn"
-           className={`pay-btn ${btnDisabled ? "loading" : ""}`}
+          className={`pay-btn ${btnDisabled ? "loading" : ""}`}
           onClick={handlePayment}
           disabled={btnDisabled}
-          
+
         >
           결제하기
         </button>

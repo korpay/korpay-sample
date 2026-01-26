@@ -3,14 +3,14 @@
 import './auth.css';
 
 import { useState } from 'react'
-import KorpaySDK, { RequestData } from "@korpay/sdk";
+import KorpaySdk, { type PaymentData } from "@korpay/sdk";
 
 interface Props {
-  initData: RequestData
+  initData: PaymentData
 }
 
 export default function AuthClient({ initData }: Props) {
-  const [paymentData] = useState<RequestData>(initData)
+  const [paymentData] = useState<PaymentData>(initData)
   const [btnDisabled, setBtnDisabled] = useState(false)
 
   const handlePayment = async () => {
@@ -19,7 +19,7 @@ export default function AuthClient({ initData }: Props) {
       return;
     }
 
-    KorpaySDK.payment("https://BASE_URL", paymentData, {
+    KorpaySdk.payment("https://BASE_URL", paymentData, {
       onStart: () => {
         setBtnDisabled(true);
       },

@@ -1,9 +1,8 @@
 import AuthClient from './components/auth'
-import {getCurrentDateTime, random} from "@/functionUtils";
-import {RequestData} from "@korpay/sdk";
+import { getCurrentDateTime, random } from "@/functionUtils";
+import type { PaymentData } from "@korpay/sdk";
 
-
-function getPaymentInfo() : RequestData {
+function getPaymentInfo(): PaymentData {
     /*
      *******************************************************
      * <인증요청 데이터 준비>

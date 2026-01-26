@@ -238,7 +238,7 @@ header("Expires: 0");
                 installment: '<?php echo $installment ?>',
             };
 
-            KorpaySDK.payment("https://BASE_URL", paymentData, {
+            KorpaySdk.payment("https://BASE_URL", paymentData, {
                 onStart: () => {
                     payBtn.disabled = true;
                     payBtn.innerText = "결제창 호출 중...";
