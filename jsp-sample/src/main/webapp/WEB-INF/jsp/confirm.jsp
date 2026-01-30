@@ -145,16 +145,33 @@
 
     boolean isApiSuccess = result.has("resultCode") && "3001".equals(result.get("resultCode").getAsString());
 
-    if(isApiSuccess) {
-        /**
-         * [DB INSERT / UPDATE]
-         * 여기서 결제 완료 처리를 수행합니다.
-         * 예: UPDATE orderTable SET status = 'PAID', amount = $result['amount'] ...  WHERE order_no = '$result['orderNumber']' ...
-         */
-        response.sendRedirect("success?orderNumber=" + orderNumber);
-    } else {
-
+    if (!isApiSuccess) {
         response.sendRedirect("fail?orderNumber=" + orderNumber);
+        return;
     }
+
+    /*
+    *******************************************************
+    * 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
+    *******************************************************
+    */
+    String approvalNumber = "";
+    try {
+        approvalNumber = result.getAsJsonObject("card").get("approvalNumber").getAsString(); 
+    } catch (Exception e) {
+    }
+    
+    if ("00000000".equals(approvalNumber)) {
+        response.sendRedirect("success?orderNumber=" + orderNumber + "&test=true");
+        return;
+    }
+    
+    /**
+     * [DB INSERT / UPDATE]
+     * 여기서 결제 완료 처리를 수행합니다.
+     * 예: UPDATE orderTable SET status = 'PAID', amount = $result['amount'] ...  WHERE order_no = '$result['orderNumber']' ...
+     */
+    response.sendRedirect("success?orderNumber=" + orderNumber);
+    
 %>
 

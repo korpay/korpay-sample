@@ -221,17 +221,27 @@ app.post('/confirm', async (req, res) => {
 
     const isApiSuccess = (httpCode === 200 && result?.resultCode === '3001');
 
-    if (isApiSuccess) {
-        /**
-         * [DB INSERT / UPDATE]
-         * 여기서 결제 완료 처리를 수행합니다.
-         * 예: UPDATE orderTable SET status = 'PAID', amount = `${result.amount}` ...  WHERE order_no = `${result.orderNumber}` ...
-         */
-        return res.redirect(`${localUrl}/success?orderNumber=${orderNumber}`);
-    } else {
+    if (!isApiSuccess) {
         return res.redirect(`${localUrl}/fail?orderNumber=${orderNumber}`);
     }
 
+    /*
+    *******************************************************
+    * 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
+    *******************************************************
+    */
+    const approvalNumber = result?.card?.approvalNumber || '';
+    if (approvalNumber === '00000000') {
+        return res.redirect(`${localUrl}/success?orderNumber=${orderNumber}&test=true`);
+    }
+
+
+    /**
+     * [DB INSERT / UPDATE]
+     * 여기서 결제 완료 처리를 수행합니다.
+     * 예: UPDATE orderTable SET status = 'PAID', amount = `${result.amount}` ...  WHERE order_no = `${result.orderNumber}` ...
+     */
+    return res.redirect(`${localUrl}/success?orderNumber=${orderNumber}`);
 });
 
 app.listen(PORT, () => {

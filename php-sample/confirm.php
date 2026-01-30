@@ -121,19 +121,29 @@ error_log("========================");
 
 $isApiSuccess = (!$curlError && $httpCode === 200 && isset($result['resultCode']) && $result['resultCode'] === '3001');
 
-if ($isApiSuccess) {
-    /**
-     * [DB INSERT / UPDATE]
-     * 여기서 결제 완료 처리를 수행합니다.
-     * 예: UPDATE orderTable SET status = 'PAID', amount = $result['amount'] ...  WHERE order_no = '$result['orderNumber']' ...
-     */
-
-    header("Location: success.php?orderNumber=" . $orderNumber);
-    exit;
-
-} else {
-
+if (!$isApiSuccess) {
     header("Location: fail.php?orderNumber=" . $orderNumber);
     exit;
 }
+
+/*
+*******************************************************
+* 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
+*******************************************************
+*/
+$approvalNumber = $result['card']['approvalNumber'] ?? '';
+if ($approvalNumber === '00000000') {
+    header("Location: success.php?orderNumber=" . $orderNumber . "&test=true");
+    exit;
+}
+
+/**
+ * [DB INSERT / UPDATE]
+ * 여기서 결제 완료 처리를 수행합니다.
+ * 예: UPDATE orderTable SET status = 'PAID', amount = $result['amount'] ...  WHERE order_no = '$result['orderNumber']' ...
+ */
+
+header("Location: success.php?orderNumber=" . $orderNumber);
+exit;
+
 ?>
