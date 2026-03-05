@@ -41,7 +41,6 @@ public class AuthRequest {
      * customerPost : 구매자 우편번호 <br>
      * reserved : 예약 필드 <br>
      * language : 언어 <br>
-     * testMode : 테스트 결제 <br>
      * cardCode : 허용 카드사 <br>
      * installment : 허용 할부개월 <br>
      *******************************************************
@@ -53,7 +52,6 @@ public class AuthRequest {
     String customerPost = "04790";
     String reserved = "예약필드 입니다. 결제 성공시 응답값에 포함됩니다.";
     String language = "ko";
-    String testMode = "true";
     String cardCode = "01:02:03:04:06:07:08:12:15";
     String installment = "00:02:03:04:05:06:07:08:09:10:11:12";
 

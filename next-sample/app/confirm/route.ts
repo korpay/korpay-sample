@@ -132,15 +132,6 @@ export async function POST(request: NextRequest) {
         return redirect(`${localUrl}/fail?orderNumber=${orderNumber}`);
     }
 
-    /*
-    *******************************************************
-    * 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
-    *******************************************************
-    */
-    const approvalNumber = result?.card?.approvalNumber || '';
-    if (approvalNumber === '00000000') {
-        return redirect(`${localUrl}/success?orderNumber=${orderNumber}&test=true`);
-    }
 
     /**
      * [DB INSERT / UPDATE]

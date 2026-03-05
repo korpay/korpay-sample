@@ -35,7 +35,6 @@
      * customerPost : 구매자 우편번호
      * reserved : 예약 필드
      * language : 언어
-     * testMode : 테스트 결제
      * cardCode : 허용 카드사
      * installment : 허용 할부개월
      *******************************************************
@@ -47,7 +46,6 @@
     String customerPost = "04790";
     String reserved = "예약필드 입니다. 결제 성공시 응답값에 포함됩니다.";
     String language = "ko";
-    String testMode = "true";
     String cardCode = "01:02:03:04:06:07:08:12:15";
     String installment = "00:02:03:04:05:06:07:08:09:10:11:12";
 
@@ -235,7 +233,6 @@
                 customerPost: '<%=customerPost%>',
                 reserved: '<%=reserved%>',
                 language: '<%=language%>',
-                testMode: '<%=testMode%>',
                 cardCode: '<%=cardCode%>',
                 installment: '<%=installment%>',
             };

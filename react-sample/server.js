@@ -44,7 +44,6 @@ app.post('/api/payment/info', (_, res) => {
      * customerPost : 구매자 우편번호
      * reserved : 예약 필드
      * language : 언어
-     * testMode : 테스트 결제
      * cardCode : 허용 카드사
      * installment : 허용 할부개월
      *******************************************************
@@ -56,7 +55,6 @@ app.post('/api/payment/info', (_, res) => {
     const customerPost = '04790';
     const reserved = '예약필드 입니다. 응답값에 포함됩니다.';
     const language = 'ko';
-    const testMode = 'true';
     const cardCode = '01:02:03:04:06:07:08:12:15';
     const installment = '00:02:03:04:05:06:07:08:09:10:11:12';
 
@@ -89,7 +87,6 @@ app.post('/api/payment/info', (_, res) => {
         customerPost,
         reserved,
         language,
-        testMode,
         cardCode,
         installment,
     });
@@ -225,15 +222,6 @@ app.post('/confirm', async (req, res) => {
         return res.redirect(`${localUrl}/fail?orderNumber=${orderNumber}`);
     }
 
-    /*
-    *******************************************************
-    * 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
-    *******************************************************
-    */
-    const approvalNumber = result?.card?.approvalNumber || '';
-    if (approvalNumber === '00000000') {
-        return res.redirect(`${localUrl}/success?orderNumber=${orderNumber}&test=true`);
-    }
 
 
     /**

@@ -32,7 +32,6 @@ $returnUrl = "http://localhost:80/confirm.php";
  * $customerPost : 구매자 우편번호
  * $reserved : 예약 필드
  * $language : 언어
- * $testMode : 테스트 결제
  * $cardCode : 허용 카드사
  * $installment : 허용 할부개월
 *******************************************************
@@ -44,7 +43,6 @@ $customerAddress = "서울특별시 성동구 성수일로 77 서울숲IT밸리 
 $customerPost = "04790";
 $reserved = "예약필드 입니다. 응답값에 포함됩니다.";
 $language = "ko";
-$testMode = "true";
 $cardCode = "01:02:03:04:06:07:08:12:15";
 $installment = "00:02:03:04:05:06:07:08:09:10:11:12";
 
@@ -233,7 +231,6 @@ header("Expires: 0");
                 customerPost: '<?php echo $customerPost ?>',
                 reserved: '<?php echo $reserved ?>',
                 language: '<?php echo $language ?>',
-                testMode: '<?php echo $testMode ?>',
                 cardCode: '<?php echo $cardCode ?>',
                 installment: '<?php echo $installment ?>',
             };

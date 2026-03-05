@@ -126,16 +126,6 @@ if (!$isApiSuccess) {
     exit;
 }
 
-/*
-*******************************************************
-* 5. [중요] 테스트 결제 여부 체크 및 데이터 변조 검증
-*******************************************************
-*/
-$approvalNumber = $result['card']['approvalNumber'] ?? '';
-if ($approvalNumber === '00000000') {
-    header("Location: success.php?orderNumber=" . $orderNumber . "&test=true");
-    exit;
-}
 
 /**
  * [DB INSERT / UPDATE]
