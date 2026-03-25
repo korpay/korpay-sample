@@ -74,7 +74,8 @@ if (!$isAuthSuccess) {
  * $reserved : 예약 필드
  * $card :
         {
-            $approvalCode : 발급사 코드
+            $cardNumber : 카드 번호
+            $approvalCode : 매입사 코드
             $installment : 승인 할부개월
             $approvalNumber : 승인 번호
             $usePointAmt : 사용 포인트
@@ -115,6 +116,10 @@ $curlError = curl_error($ch);
 
 $result = json_decode($response, true);
 
+error_log("===== CURL DEBUG =====");
+error_log("HTTP CODE : " . $httpCode);
+error_log("CURL ERROR : " . $curlError);
+error_log("Raw Response : " . $response);
 error_log("===== API RESPONSE =====");
 error_log(print_r($result, true));
 error_log("========================");

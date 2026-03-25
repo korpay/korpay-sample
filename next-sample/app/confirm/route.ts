@@ -84,7 +84,8 @@ export async function POST(request: NextRequest) {
     * reserved : 예약 필드
     * card :
             {
-                approvalCode : 발급사 코드
+                cardNumber : 카드 번호
+                approvalCode : 매입사 코드
                 installment : 승인 할부개월
                 approvalNumber : 승인 번호
                 usePointAmt : 사용 포인트
