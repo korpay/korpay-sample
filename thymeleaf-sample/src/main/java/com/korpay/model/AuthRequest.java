@@ -41,8 +41,8 @@ public class AuthRequest {
      * customerPost : 구매자 우편번호 <br>
      * reserved : 예약 필드 <br>
      * language : 언어 <br>
-     * cardCode : 허용 카드사 <br>
-     * installment : 허용 할부개월 <br>
+     * card.code : 허용 카드사 <br>
+     * card.installment : 허용 할부개월 <br>
      *******************************************************
      */
     String customerName = "홍길동";
@@ -54,6 +54,15 @@ public class AuthRequest {
     String language = "ko";
     String cardCode = "01:02:03:04:06:07:08:12:15";
     String installment = "00:02:03:04:05:06:07:08:09:10:11:12";
+    /*
+    CardOptions card = new CardOptions();
+
+    @Getter
+    public static class CardOptions {
+        List<String> code = Arrays.asList("01", "02", "03", "04", "06", "07", "08", "12", "15");
+        List<Integer> installment = Arrays.asList(0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    }
+    */
 
     /*
      *******************************************************

@@ -153,8 +153,12 @@
                 customerPost: [[${auth.customerPost}]],
                 reserved: [[${auth.reserved}]],
                 language: [[${auth.language}]],
-                cardCode: [[${auth.cardCode}]],
-                installment: [[${auth.installment}]],
+                /*
+                card: {
+                     code: [[${auth.card.code}]],
+                     installment: [[${auth.card.installment}]]
+                 }
+                */
             };
 
             KorpaySDK.payment("https://BASE_URL", paymentData, {

@@ -35,8 +35,8 @@
      * customerPost : 구매자 우편번호
      * reserved : 예약 필드
      * language : 언어
-     * cardCode : 허용 카드사
-     * installment : 허용 할부개월
+     * card.code : 허용 카드사 (배열)
+     * card.installment : 허용 할부개월 (배열)
      *******************************************************
      */
     String customerName = "홍길동";
@@ -46,8 +46,6 @@
     String customerPost = "04790";
     String reserved = "예약필드 입니다. 결제 성공시 응답값에 포함됩니다.";
     String language = "ko";
-    String cardCode = "01:02:03:04:06:07:08:12:15";
-    String installment = "00:02:03:04:05:06:07:08:09:10:11:12";
 
     /*
      *******************************************************
@@ -233,8 +231,12 @@
                 customerPost: '<%=customerPost%>',
                 reserved: '<%=reserved%>',
                 language: '<%=language%>',
-                cardCode: '<%=cardCode%>',
-                installment: '<%=installment%>',
+                /* 
+                card: {
+                    code: ['01', '02', '03', '04', '06', '07', '08', '12', '15'],
+                    installment: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                }, 
+                */
             };
 
             KorpaySDK.payment("https://BASE_URL", paymentData, {

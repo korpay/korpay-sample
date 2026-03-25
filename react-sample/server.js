@@ -44,8 +44,8 @@ app.post('/api/payment/info', (_, res) => {
      * customerPost : 구매자 우편번호
      * reserved : 예약 필드
      * language : 언어
-     * cardCode : 허용 카드사
-     * installment : 허용 할부개월
+     * card.code : 허용 카드사 (배열))
+     * card.installment : 허용 할부개월 (배열)
      *******************************************************
     */
     const customerName = '홍길동';
@@ -55,8 +55,12 @@ app.post('/api/payment/info', (_, res) => {
     const customerPost = '04790';
     const reserved = '예약필드 입니다. 응답값에 포함됩니다.';
     const language = 'ko';
-    const cardCode = '01:02:03:04:06:07:08:12:15';
-    const installment = '00:02:03:04:05:06:07:08:09:10:11:12';
+    /* 
+    const card = {
+        code: ['01', '02', '03', '04', '06', '07', '08', '12', '15'],
+        installment: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    };
+    */
 
     /*
      *******************************************************
@@ -87,8 +91,7 @@ app.post('/api/payment/info', (_, res) => {
         customerPost,
         reserved,
         language,
-        cardCode,
-        installment,
+        // card,
     });
 });
 
