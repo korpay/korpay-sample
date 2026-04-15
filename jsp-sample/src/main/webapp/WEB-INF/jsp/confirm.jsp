@@ -6,8 +6,7 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="org.apache.hc.client5.http.impl.classic.CloseableHttpClient" %>
 <%@ page import="org.apache.hc.client5.http.impl.classic.HttpClients" %>
-<%@ page import="org.apache.hc.core5.http.message.BasicNameValuePair" %>
-<%@ page import="org.apache.hc.client5.http.entity.UrlEncodedFormEntity" %>
+<%@ page import="org.apache.hc.core5.net.URIBuilder" %>
 <%@ page import="org.apache.hc.core5.http.io.entity.EntityUtils" %>
 <%@ page import="org.apache.hc.core5.http.io.support.ClassicRequestBuilder" %>
 <%@ page import="org.apache.hc.core5.http.ClassicHttpRequest" %>
@@ -18,11 +17,10 @@
     public JsonObject sendPaymentRequest(String apiUrl, String paymentKey) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
-            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(apiUrl)
-                    .setEntity(new UrlEncodedFormEntity(Arrays.asList(
-                            new BasicNameValuePair("paymentKey", paymentKey)),
-                            StandardCharsets.UTF_8
-                    )).build();
+            URI uri = new URIBuilder(apiUrl)                                                                                               
+                        .addParameter("paymentKey", paymentKey)
+                        .build();                                                                                                              
+            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(uri).build();
 
             JsonObject execute = httpClient.execute(httpPost, response -> {
                 String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);

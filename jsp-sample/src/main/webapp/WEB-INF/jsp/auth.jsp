@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%!
     /*
      *******************************************************
@@ -20,7 +21,7 @@
     String merchantId = "";
     String merchantKey = "";
     String productName = "테스트 상품";
-    String orderNumber = "testOrder" + LocalDate.now() + (int) (Math.random() * 10000);
+    String orderNumber = "testOrder" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + (int) (Math.random() * 10000);
     int amount = 1004;
     String payMethod = "card";
     String returnUrl = "http://localhost:8080/confirm";

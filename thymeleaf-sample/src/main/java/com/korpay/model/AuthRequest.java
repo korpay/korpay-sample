@@ -3,8 +3,10 @@ package com.korpay.model;
 import lombok.Getter;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 public class AuthRequest {

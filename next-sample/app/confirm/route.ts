@@ -104,14 +104,11 @@ export async function POST(request: NextRequest) {
     let result;
 
     try {
-        const response = await fetch(paymentUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                paymentKey,
-            })
+        const query = new URLSearchParams({
+            paymentKey,
+        }).toString();
+        const response = await fetch(`${paymentUrl}?${query}`, {
+            method: 'POST'
         });
 
         httpCode = response.status;

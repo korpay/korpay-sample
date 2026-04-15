@@ -197,14 +197,11 @@ app.post('/confirm', async (req, res) => {
     let result;
 
     try {
-        const response = await fetch(paymentUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
+        const query = new URLSearchParams({
                 paymentKey,
-            })
+            }).toString();
+        const response = await fetch(`${paymentUrl}?${query}`, {
+            method: 'POST'
         });
 
         httpCode = response.status;
