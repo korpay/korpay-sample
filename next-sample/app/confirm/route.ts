@@ -114,6 +114,15 @@ export async function POST(request: NextRequest) {
         httpCode = response.status;
 
         const text = await response.text();
+        /*
+         * [응답 필드 추가 호환성]
+         * 결제 응답에는 향후 새로운 필드가 추가될 수 있습니다.
+         * JSON.parse 는 모델/스키마 개념이 없어 알 수 없는 필드가 와도 그대로 보존하며 에러가 나지 않습니다.
+         * 만약 Zod 등 검증 라이브러리를 도입한다면, 추가 필드를 허용하도록 설정해야 합니다.
+         *   - Zod  : .strict() 사용 금지 → 기본(strip) 또는 .passthrough() 사용
+         *   - Joi  : .unknown(true) 또는 { stripUnknown: true }
+         *   - class-validator : forbidNonWhitelisted: true 사용 금지
+         */
         result = JSON.parse(text);
     } catch (err) {
         result = err;

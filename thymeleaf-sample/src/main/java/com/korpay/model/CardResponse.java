@@ -1,8 +1,11 @@
 package com.korpay.model;
 
+// import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// 응답에 새 필드가 추가되어도 Jackson 역직렬화 시 예외가 나지 않도록 알 수 없는 필드는 무시합니다.
+// @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @NoArgsConstructor
 public class CardResponse {

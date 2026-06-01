@@ -1,7 +1,20 @@
 package com.korpay.model;
 
+// import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+/*
+ *******************************************************
+ * [중요] 응답 필드 추가에 대한 호환성
+ * 결제 응답에 향후 새로운 필드가 추가될 수 있습니다.
+ * Jackson(ObjectMapper) 으로 역직렬화하는 경우,
+ * 기본 설정(FAIL_ON_UNKNOWN_PROPERTIES=true)에서는
+ * 모델에 정의되지 않은 필드가 들어오면 예외가 발생합니다.
+ * 아래 @JsonIgnoreProperties(ignoreUnknown = true) 로 항상 무시하도록 합니다.
+ * (현재 샘플은 Gson 을 사용하며, Gson 은 알 수 없는 필드를 기본적으로 무시합니다)
+ *******************************************************
+ */
+// @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Builder
 @ToString
