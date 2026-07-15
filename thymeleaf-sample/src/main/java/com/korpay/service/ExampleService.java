@@ -19,6 +19,14 @@ public class ExampleService {
     private static final String paymentUrl = "https://BASE_URL/payments/confirm";
 
     public ApprovalResponse sendPaymentRequest(String paymentKey) {
+        /*
+         * [Read Timeout 설정 안내]
+         * 결제 승인(confirm) API 호출 시 Read Timeout 설정을 권장합니다.
+         * 네트워크 지연 등으로 응답이 늦어질 때 무한 대기를 방지하기 위함입니다.
+         * 권장 값: 60초
+         * 단, 타임아웃이 발생하더라도 실제 승인은 정상 완료되었을 수 있으므로,
+         * 타임아웃 시에는 결제 상태 조회 등으로 최종 결과를 반드시 확인해야 합니다.
+         */
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
             URI uri = new URIBuilder(paymentUrl)                                                                                           
