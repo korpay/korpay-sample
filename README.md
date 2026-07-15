@@ -11,6 +11,5 @@
 ### [Thymeleaf(Spring Boot)](https://github.com/korpay/korpay-sample/tree/main/thymeleaf-sample)
 
 ## 문의사항
-기본 문의사항은 영업담당자에게 문의 부탁드립니다.<br>
-개발 문의사항은 dev@kopay.com 으로 문의 부탁드립니다.
+문의사항은 영업담당자에게 문의 부탁드립니다.<br>
 
