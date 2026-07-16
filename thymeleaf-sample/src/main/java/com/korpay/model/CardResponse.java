@@ -18,12 +18,14 @@ public class CardResponse {
      * approvalNumber : 승인 번호 <br>
      * usePointAmt : 사용 포인트 <br>
      * remainPointAmt : 잔액 포인트 <br>
+     * cardAmount : 카드 사용 금액 <br>
      */
-    
+
     String cardNumber;
     String approvalCode;
     String installment;
     String approvalNumber;
     String usePointAmt;
     String remainPointAmt;
+    Integer cardAmount;
 }

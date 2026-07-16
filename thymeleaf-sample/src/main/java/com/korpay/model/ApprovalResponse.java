@@ -45,7 +45,9 @@ public class ApprovalResponse {
      * approvedAt : 승인 일시 <br>
      * payMethod : 결제 수단 <br>
      * reserved : 예약 필드 <br>
+     * channelId : 통합 ID 하위 실 결제 Merchant Id (통합 ID 사용 시에만 포함) <br>
      * card : {@link CardResponse} <br>
+     * easyPay : {@link EasyPayResponse} (간편결제로 결제한 경우에만 포함) <br>
      * <br>
      * <b>결제 실패 응답</b> <br>
      * resultCode : 결과 코드 <br>
@@ -65,6 +67,8 @@ public class ApprovalResponse {
     String approvedAt;
     String payMethod;
     String reserved;
+    String channelId;
 
     CardResponse card;
+    EasyPayResponse easyPay;
 }

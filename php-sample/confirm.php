@@ -72,6 +72,7 @@ if (!$isAuthSuccess) {
  * $approvedAt : 승인 일시
  * $payMethod : 결제 수단
  * $reserved : 예약 필드
+ * $channelId : 통합 ID 하위 실 결제 Merchant Id (통합 ID 사용 시에만 포함)
  * $card :
         {
             $cardNumber : 카드 번호
@@ -80,6 +81,13 @@ if (!$isAuthSuccess) {
             $approvalNumber : 승인 번호
             $usePointAmt : 사용 포인트
             $remainPointAmt : 잔액 포인트
+            $cardAmount : 카드 사용 금액
+        }
+ * $easyPay : (간편결제로 결제한 경우에만 포함)
+        {
+            $moneyAmount : 간편결제 머니 사용 금액
+            $pointAmount : 간편결제 포인트 사용 금액
+            $provider : 간편결제 제공자 (NAVERPAY, KAKAOPAY, TOSSPAY)
         }
 
  * 결제 실패 응답
