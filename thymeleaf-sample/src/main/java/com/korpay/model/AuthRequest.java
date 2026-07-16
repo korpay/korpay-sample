@@ -21,7 +21,7 @@ public class AuthRequest {
      * productName : 상품명 <br>
      * orderNumber : 주문 번호 <br>
      * amount : 결제 요청 금액 <br>
-     * payMethod : 결제 요청 수단 (card 고정) <br>
+     * payMethod : 결제 요청 수단 ( card , easypay , unified ) <br>
      * returnUrl : 응답 페이지 <br>
      *******************************************************
      */
@@ -54,8 +54,7 @@ public class AuthRequest {
     String customerPost = "04790";
     String reserved = "예약필드 입니다. 결제 성공시 응답값에 포함됩니다.";
     String language = "ko";
-    String cardCode = "01:02:03:04:06:07:08:12:15";
-    String installment = "00:02:03:04:05:06:07:08:09:10:11:12";
+    
     /*
     CardOptions card = new CardOptions();
 

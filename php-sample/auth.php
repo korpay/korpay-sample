@@ -10,7 +10,7 @@ header("Content-Type:text/html; charset=utf-8;");
  * $productName : 상품명
  * $orderNumber : 주문 번호
  * $amount : 결제 요청 금액
- * $payMethod : 결제 요청 수단(card 고정)
+ * $payMethod : 결제 요청 수단 ( card , easypay , unified )
  * $returnUrl : 응답 페이지
 *******************************************************
 */
