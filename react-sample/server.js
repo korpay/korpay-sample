@@ -21,7 +21,7 @@ app.post('/api/payment/info', (_, res) => {
      * productName : 상품명
      * orderNumber : 주문 번호
      * amount : 결제 요청 금액
-     * payMethod : 결제 요청 수단 ( card , easypay , unified )
+     * payMethod : 결제 요청 수단 ( card , easyPay , unified )
      * returnUrl : 응답 페이지
      *******************************************************
     */
@@ -202,8 +202,6 @@ app.post('/confirm', async (req, res) => {
                 approvalCode : 매입사 코드
                 installment : 승인 할부개월
                 approvalNumber : 승인 번호
-                usePointAmt : 사용 포인트
-                remainPointAmt : 잔액 포인트
                 cardAmount : 카드 사용 금액
             }
     * easyPay : (간편결제로 결제한 경우에만 포함)

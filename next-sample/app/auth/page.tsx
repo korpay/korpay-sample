@@ -13,7 +13,7 @@ function getPaymentInfo(): PaymentData {
      * productName : 상품명
      * orderNumber : 주문 번호
      * amount : 결제 요청 금액
-     * payMethod : 결제 요청 수단 ( card , easypay , unified )
+     * payMethod : 결제 요청 수단 ( card , easyPay , unified )
      * returnUrl : 응답 페이지
      *******************************************************
     */

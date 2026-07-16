@@ -21,7 +21,7 @@ public class AuthRequest {
      * productName : 상품명 <br>
      * orderNumber : 주문 번호 <br>
      * amount : 결제 요청 금액 <br>
-     * payMethod : 결제 요청 수단 ( card , easypay , unified ) <br>
+     * payMethod : 결제 요청 수단 ( card , easyPay , unified ) <br>
      * returnUrl : 응답 페이지 <br>
      *******************************************************
      */

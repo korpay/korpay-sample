@@ -79,8 +79,6 @@ if (!$isAuthSuccess) {
             $approvalCode : 매입사 코드
             $installment : 승인 할부개월
             $approvalNumber : 승인 번호
-            $usePointAmt : 사용 포인트
-            $remainPointAmt : 잔액 포인트
             $cardAmount : 카드 사용 금액
         }
  * $easyPay : (간편결제로 결제한 경우에만 포함)

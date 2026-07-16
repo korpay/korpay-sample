@@ -16,8 +16,6 @@ public class CardResponse {
      * approvalCode : 매입사 코드 <br>
      * installment : 승인 할부개월 <br>
      * approvalNumber : 승인 번호 <br>
-     * usePointAmt : 사용 포인트 <br>
-     * remainPointAmt : 잔액 포인트 <br>
      * cardAmount : 카드 사용 금액 <br>
      */
 
@@ -25,7 +23,5 @@ public class CardResponse {
     String approvalCode;
     String installment;
     String approvalNumber;
-    String usePointAmt;
-    String remainPointAmt;
     Integer cardAmount;
 }
