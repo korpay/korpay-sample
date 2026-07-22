@@ -26,13 +26,13 @@ public class AuthResponse {
      *******************************************************
      */
 
-    String resultCode = "E999";
-    String message = "인증 실패";
-    String merchantId = "";
-    String orderNumber = "";
-    String amount = "";
-    String reserved = "";
-    String paymentKey = "";
+    private String resultCode = "E999";
+    private String message = "인증 실패";
+    private String merchantId = "";
+    private String orderNumber = "";
+    private String amount = "";
+    private String reserved = "";
+    private String paymentKey = "";
 
 
     /*

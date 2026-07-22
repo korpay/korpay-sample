@@ -80,12 +80,14 @@ if (!$isAuthSuccess) {
             $installment : 승인 할부개월
             $approvalNumber : 승인 번호
             $cardAmount : 카드 사용 금액
+            $usePointAmt : 사용 포인트 금액 (다음 버전 v1.4에서 삭제 예정 / 해당 필드 사용 금지)
+            $remainPointAmt : 잔여 포인트 금액 (다음 버전 v1.4에서 삭제 예정 / 해당 필드 사용 금지)
         }
  * $easyPay : (간편결제로 결제한 경우에만 포함)
         {
-            $moneyAmount : 간편결제 머니 사용 금액
-            $pointAmount : 간편결제 포인트 사용 금액
-            $provider : 간편결제 제공자 (NAVERPAY, KAKAOPAY, TOSSPAY)
+            $moneyAmount : 유상 포인트 결제 금액
+            $pointAmount : 무상 포인트 결제 금액
+            $provider : 간편결제사 코드 (NAVERPAY, KAKAOPAY, TOSSPAY)
         }
 
  * 결제 실패 응답

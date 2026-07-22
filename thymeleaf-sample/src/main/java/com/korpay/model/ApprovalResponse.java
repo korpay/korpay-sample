@@ -55,20 +55,20 @@ public class ApprovalResponse {
      *******************************************************
      */
 
-    String resultCode = "";
-    String message;
+    private String resultCode;
+    private String message;
 
-    String tid;
-    String merchantId;
-    String orderNumber;
-    String productName;
-    String currency;
-    Integer amount;
-    String approvedAt;
-    String payMethod;
-    String reserved;
-    String channelId;
+    private String tid;
+    private String merchantId;
+    private String orderNumber;
+    private String productName;
+    private String currency;
+    private Integer amount;
+    private String approvedAt;
+    private String payMethod;
+    private String reserved;
+    private String channelId;
 
-    CardResponse card;
-    EasyPayResponse easyPay;
+    private CardResponse card;
+    private EasyPayResponse easyPay;
 }

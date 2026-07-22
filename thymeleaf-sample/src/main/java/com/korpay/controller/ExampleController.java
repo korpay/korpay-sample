@@ -95,7 +95,7 @@ public class ExampleController {
         System.out.println(result.toString());
         System.out.println("========================");
 
-        boolean isApiSuccess = !result.getResultCode().isBlank() && "3001".equals(result.getResultCode());
+        boolean isApiSuccess = "3001".equals(result.getResultCode());
         if (isApiSuccess) {
             /**
              * [DB INSERT / UPDATE]

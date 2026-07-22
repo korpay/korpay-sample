@@ -12,12 +12,12 @@ public class EasyPayResponse {
 
     /**
      * <b>간편결제 응답 파라미터</b> (간편결제로 결제한 경우에만 포함) <br>
-     * moneyAmount : 간편결제 머니 사용 금액 <br>
-     * pointAmount : 간편결제 포인트 사용 금액 <br>
-     * provider : 간편결제 제공자 (NAVERPAY, KAKAOPAY, TOSSPAY) <br>
+     * moneyAmount : 유상 포인트 결제 금액 <br>
+     * pointAmount : 무상 포인트 결제 금액 <br>
+     * provider : 간편결제사 코드 (NAVERPAY, KAKAOPAY, TOSSPAY) <br>
      */
 
-    Integer moneyAmount;
-    Integer pointAmount;
-    String provider;
+    private Integer moneyAmount;
+    private Integer pointAmount;
+    private String provider;
 }

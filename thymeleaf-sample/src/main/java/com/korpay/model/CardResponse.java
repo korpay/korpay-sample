@@ -17,11 +17,17 @@ public class CardResponse {
      * installment : 승인 할부개월 <br>
      * approvalNumber : 승인 번호 <br>
      * cardAmount : 카드 사용 금액 <br>
+     * usePointAmt : 사용 포인트 금액 (다음 버전 v1.4에서 삭제 예정 / 해당 필드 사용 금지) <br>
+     * remainPointAmt : 잔여 포인트 금액 (다음 버전 v1.4에서 삭제 예정 / 해당 필드 사용 금지) <br>
      */
 
-    String cardNumber;
-    String approvalCode;
-    String installment;
-    String approvalNumber;
-    Integer cardAmount;
+    private String cardNumber;
+    private String approvalCode;
+    private String installment;
+    private String approvalNumber;
+    private Integer cardAmount;
+
+    // 다음 버전(v1.4)에서 삭제 예정 - 해당 필드 사용 금지
+    private String usePointAmt;
+    private String remainPointAmt;
 }
