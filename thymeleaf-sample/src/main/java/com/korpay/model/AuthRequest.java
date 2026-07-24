@@ -81,8 +81,8 @@ public class AuthRequest {
     //   ※ 마지막 인덱스의 사업자 번호로 현금영수증이 발행됩니다.
     // 단일 사업자면 1개만, 다단계면 상위→최하위 순서로 여러 개 (아래는 2단계 예시)
     List<SubMerchant> subMerchant = Arrays.asList(
-        new SubMerchant(1112223333, "상위 사업자 상호", "상위 사업자 주소", 11111),   // 상위 가맹점 (본사)
-        new SubMerchant(4445556666, "하위 사업자 상호", "하위 사업자 주소", 22222)    // 최하위 종사업자 → 현금영수증 발행 대상 (마지막 인덱스)
+        new SubMerchant("1112223333", "상위 사업자 상호", "상위 사업자 주소", "11111"),   // 상위 가맹점 (본사)
+        new SubMerchant("4445556666", "하위 사업자 상호", "하위 사업자 주소", "22222")    // 최하위 종사업자 → 현금영수증 발행 대상 (마지막 인덱스)
     );
 
     @Getter
@@ -104,10 +104,10 @@ public class AuthRequest {
     @Getter
     @AllArgsConstructor
     public static class SubMerchant {
-        private Integer businessNumber;   // 종사업자 번호
+        private String businessNumber;    // 종사업자 번호 (하이픈 없이 숫자 10자리)
         private String name;              // 상호
         private String address;           // 주소
-        private Integer postalCode;       // 종사업자 우편번호
+        private String postalCode;        // 종사업자 우편번호 (숫자 최대 6자리)
     }
     */
 
