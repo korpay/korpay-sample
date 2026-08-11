@@ -71,19 +71,25 @@ app.post('/api/payment/info', (_, res) => {
     const language = 'ko';
 
     /*
+    // card 옵션 (아래 [기본]/[다이렉트] 중 하나만 사용)
+    // [기본] 카드사 목록 노출
     const card = {
         code: ['01', '02', '03', '04', '06', '07', '08', '12', '15'],
         installment: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         visible: true,   // 통합결제(unified) 시 카드 섹션 표시 여부
-        direct: false,   // 카드 다이렉트 모드
     };
+    // [다이렉트] 특정 카드사로 바로 진입 (code·installment는 단일 값, visible 없음)
+    const card = { direct: true, code: '04', installment: 0 };
 
+    // easyPay 옵션 (아래 [기본]/[다이렉트] 중 하나만 사용)
+    // [기본] 간편결제사 목록 노출
     const easyPay = {
         code: ['NAVERPAY', 'KAKAOPAY', 'TOSSPAY'],
         installment: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         visible: true,   // 통합결제(unified) 시 간편결제 섹션 표시 여부
-        direct: false,   // 간편결제 다이렉트 모드
     };
+    // [다이렉트] 특정 간편결제사로 바로 진입
+    const easyPay = { direct: true, code: 'TOSSPAY', installment: 0 };
 
     // ※ direct(다이렉트 모드)는 card / easyPay 중 하나에만 true로 설정할 수 있습니다.
     // subMerchant : 간편결제 시 필수! 통합결제(unified)여도 하위에 간편결제 MID가 포함되어 있으면 필수입니다.
